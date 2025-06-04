@@ -6,7 +6,7 @@
 #    By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/15 20:34:57 by iksaiz-m          #+#    #+#              #
-#    Updated: 2025/05/28 19:58:17 by iksaiz-m         ###   ########.fr        #
+#    Updated: 2025/05/30 18:37:03 by iksaiz-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT        = $(LIBFT_DIR)libft.a
 MINILIBX_DIR = minilibx-linux/
 MINILIBX     = $(MINILIBX_DIR)libmlx.a
 HEADERS      = -I $(LIBFT_DIR)
-CFLAGS       = -Wall -Wextra -Werror -O3 -g3
+CFLAGS       = -Wall -Wextra -Werror -O3 -g -g3
 
 NAME         = cub3d
 RM           = rm -rf

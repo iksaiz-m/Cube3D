@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:38:04 by nkrasimi          #+#    #+#             */
-/*   Updated: 2025/05/30 17:32:03 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/06/02 19:33:48 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,6 @@ int main (int ac, char **av)
 		return (mess(1, ARGERROR), 1);
 	if (av[1][0] == '\0')
 		return (mess(1, ARGERROR2), 1);
-
 	init_values(&mapa);
 	/* i = 0; */
 	/* Vamos a ver Ibon aqui tenemos que hacer el parseo de los argumentos por terminal */

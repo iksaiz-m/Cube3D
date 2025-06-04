@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:33:46 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/05/30 17:19:41 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/06/02 21:25:23 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,16 @@
 # define MAPERROR "Something went wrong copying the map\n"
 # define MAPERROR2 "El mapa no se ha podido abrir\n"
 # define MAPERROR3 "Error: Empty map\n"
-# define MAPERROR4 "North word is wrong\n"
-# define MAPERROR5 "South word is wrong\n"
-# define MAPERROR6 "West word is wrong\n"
-# define MAPERROR7 "East word is wrong\n"
+# define MAPERROR4 "Map is not closed\n"
+# define MAPERROR5 "North word is wrong\n"
+# define MAPERROR6 "South word is wrong\n"
+# define MAPERROR7 "West word is wrong\n"
+# define MAPERROR8 "East word is wrong\n"
 # define IMG "The image of one of the directions was not found in the system\n"
 # define FORMAT "Lo que van delante de .cub tiene que ser imprimible\n"
 # define FORMAT2 "Tiene que tener algo delante de la extension .cub\n"
 # define FORMAT3 "There is some non digit character\n"
-# define SPOTERROR "Characters positions is initialized in more than one spot\n"
+# define SPOTERROR "Should have only one player and map full with only 0 and 1\n"
 # define MEMERROR "Memory allocation failed\n"
 # define RGBERROR "There aren't three arguments after spliting\n"
 # define RGBERROR2 "Some introduced number is not valid for rgb standard\n"
@@ -93,13 +94,15 @@ typedef struct s_map
 	char	*floorcolor;
 	char	*ceilingcolor;
 	char	map[2000][2000];
-	int		nmap;
+	// int		nmap;
 	char	*path;
 	char	**final_map;
 	char	**toflood_map;
 	char	**spaceless_map;
 	int		x;
 	int		y;
+	int		column;
+	int		row;
 	void	*mlx;
 	void	*mlx_win;
 }		t_map;
@@ -142,13 +145,22 @@ void		flood_staff(t_map *map);
 
 //utils3.c
 void		map4flood(t_map *map);
-int			checkns(t_map *map);
+// int			checkns(t_map *map);
+// int			checkns(t_map *map, int count);
+int			checkns(t_map *map, int count, int i, int ii);
 void		add_values(t_map *map, int i, int ii);
 void		mess(int fd, char *str);
+int			checkclosemap(t_map *map, int i, int ii);
 
 //utils4.c
 void		checkcolors(t_map *map, int i);
 void		isvalidnum(char **arr2);
 void		isrgbable(char **arr2);
+void		flood_fill(t_map *mapa, char **map, int x, int y);
+
+void	freeall(t_map *map);
+int		ft_is_nswe(char	c);
+// int			flood_fill(char **map, int x, int y);
+// void		get_row_column(t_map *map);
 
 #endif

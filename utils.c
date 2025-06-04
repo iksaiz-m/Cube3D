@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:47:48 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/05/29 20:47:19 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/06/04 20:55:42 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ void	checkdirections(t_map *map, int i)
 
 	arr = ft_split(map->directions[i], ' ');
 	if (i == 0 && ft_strcmp(arr[0], "NO"))
-		return (mess(2, MAPERROR3), exit(1));
-	if (i == 1 && ft_strcmp(arr[0], "SO"))
-		return (mess(2, MAPERROR4), exit(1));
-	if (i == 2 && ft_strcmp(arr[0], "WE"))
 		return (mess(2, MAPERROR5), exit(1));
-	if (i == 3 && ft_strcmp(arr[0], "EA"))
+	if (i == 1 && ft_strcmp(arr[0], "SO"))
 		return (mess(2, MAPERROR6), exit(1));
+	if (i == 2 && ft_strcmp(arr[0], "WE"))
+		return (mess(2, MAPERROR7), exit(1));
+	if (i == 3 && ft_strcmp(arr[0], "EA"))
+		return (mess(2, MAPERROR8), exit(1));
 	/* Me falta ver si la ruta existe  */
 	if (arr[1])
 		noendline = noendl_dup(arr[1]);
@@ -126,6 +126,32 @@ void	directions_bridge(t_map *map, int *i, int fd)
 	}
 }
 
+// int	checkclosemap(t_map *map, int i, int ii)
+// {
+// 	int x;
+
+// 	while (map->final_map[i])
+// 	{
+// 		ii = 0;
+// 		while(map->final_map[i][ii])
+// 		{
+// 			printf("ii: %c\n", map->final_map[i][ii]);
+// 			if (map->final_map[i][ii + 1] == '\n' || map->final_map[i][ii + 1] == '\0')
+// 				if (map->final_map[i][ii] != '1')
+// 				{
+// 					printf("\n\n\n\n");
+// 					printf("valor ii: %d\n", ii);
+// 					return (0);
+// 				}
+// 			ii++;
+// 		}
+// 		x = ii;
+// 		i++;
+// 		printf("valor i: %d\n", i);
+// 	}
+// 	return (1);
+// }
+
 int	check3atributtes(t_map *map)
 {
 	int	fd;
@@ -145,10 +171,12 @@ int	check3atributtes(t_map *map)
 		/* Para terminar meto las lineas de mapa y me aseguro de quitar espacios y ver que los caracteres son correctos REMINDER:El mapa que le tengo que pasar a Ibon es la version con espacios*/
 		i = 0;
 		mapcpy(map, &i, fd);
-		printf("El numero de lineas del mapa es: %d\n", map->nmap);
+		printf("El numero de lineas del mapa es: %d\n", map->row);
 		getfinalmap(map);
 		if (map->final_map == NULL)
 			return (mess(2, MAPERROR), freeme(map->final_map), 0);
+		// if (!checkclosemap(map, 0, 0))
+		// 	return ((mess(2, MAPERROR4), 0));
 		/* Floodfill para asegurarme que el mapa esta correctamente cerrado */
 		flood_staff(map);
 	}

@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:53:31 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/05/30 17:18:39 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/06/02 21:26:35 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,27 @@ void	checkcolors(t_map *map, int i)
 	freeme(arr2);
 }
 
-// static void	flood_fill(char **map, int x, int y)
-// {
-// 	if (map[y][x] && map[y][x] != '1')
-// 	{
-// 		map[y][x] = '1';
-// 		flood_fill(map, x + 1, y);
-// 		flood_fill(map, x - 1, y);
-// 		flood_fill(map, x, y + 1);
-// 		flood_fill(map, x, y - 1);
-// 	}
-// }
+ int	ft_is_nswe(char	c)
+{
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E' || c == '1'
+		|| c == '0' || c == ' ' || c == '	' || c == '\n')
+		return (1);
+	return (0);
+}
+
+void	flood_fill(t_map *mapa, char **map, int x, int y)
+{
+	if (map[x][y] == ' ' || map[x][y] == '\n'|| map[x][y] == '	')
+		return (mess(2, MAPERROR4), freeall(mapa), exit(1));
+	if (map[x][y] && map[x][y] != '1')
+	{
+		// if (ft_is_nswe(map[x][y]) != 1)
+		if (map[x][y] != 1)
+			map[x][y] = '1';
+		flood_fill(mapa, map, x + 1, y);
+		flood_fill(mapa, map, x - 1, y);
+		flood_fill(mapa, map, x, y + 1);
+		flood_fill(mapa, map, x, y - 1);
+		// ft_is_nswe
+	}
+}
