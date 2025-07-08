@@ -6,14 +6,16 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 20:40:13 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/06/04 20:54:32 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/06/16 21:27:54 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3.h"
 
 //Para las rotaciones habra que crear un vector de direccion y uno de camara del que se disparen los rayos.
-
+int mapX = 8;
+int mapY = 8;
+int mapS = 64;
 //  π / 2 = 90°
 // isRayFacingDown  = rayAngle > 0 && rayAngle < pi [180];
 // isRayFacingUp    = !isRayFacingDown;

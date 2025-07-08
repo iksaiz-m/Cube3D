@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:37:36 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/05/29 18:37:29 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/06/27 18:27:01 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,6 @@ static void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	offset = (y * img->line_len) + (x * (img->bpp / 8));
 	*(unsigned int *)(img->addr + offset) = color;
 }
-
-static void	error(void)
-{
-	ft_printf("Error\n");
-	exit(1);
-}
-
-// void	data_init(t_fractal *fractal)
-// {
-// 	fractal->escape_value = 4;
-// 	fractal->iterations = 42;
-// 	fractal->changed_x = 0.0;
-// 	fractal->changed_y = 0.0;
-// 	fractal->zoom = 1.0;
-// }
 
 int	closewindow(t_fractal *fractal)
 {

@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:30:31 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/06/02 21:27:13 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/08 19:32:10 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	map4flood(t_map *map)
 	int	i;
 
 	i = 0;
-	mess(2, "Let's start the map to flood it\n");
+	msg(2, "Let's start the map to flood it\n");
 	map->toflood_map = ft_calloc((map->row) + 1, sizeof(char *));
 	if (!map->toflood_map)
-		return (mess(2, MEMERROR), exit(1));
+		return (msg(2, MEMERROR), exit(1));
 	while (i < map->row)
 	{
 		map->toflood_map[i] = ft_strdup(map->map[i]);
@@ -29,7 +29,7 @@ void	map4flood(t_map *map)
 	i = 0;
 	while (map->toflood_map[i])
 	{
-		mess(1, map->toflood_map[i]);
+		msg(1, map->toflood_map[i]);
 		i++;
 	}
 }
@@ -54,11 +54,6 @@ int	checkns(t_map *map, int count, int i, int ii)
 		}
 		i++;
 	}
-	// map->toflood_map[i][ii] != 'N' && map->toflood_map[i][ii] != 'S'
-	// 			&& map->toflood_map[i][ii] != 'E' && map->toflood_map[i][ii] != 'W'
-	// 			&& map->toflood_map[i][ii] != '1' && map->toflood_map[i][ii] != '0'
-	// 			&& map->toflood_map[i][ii] != ' ' && map->toflood_map[i][ii] != '	'
-	// 			&& map->toflood_map[i][ii] != '\n')
 	return (count);
 }
 
@@ -68,7 +63,7 @@ void	add_values(t_map *map, int i, int ii)
 	map->y = ii;
 }
 
-void	mess(int fd, char *str)
+void	msg(int fd, char *str)
 {
 	int	i;
 

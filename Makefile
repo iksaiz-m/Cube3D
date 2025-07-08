@@ -6,7 +6,7 @@
 #    By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/15 20:34:57 by iksaiz-m          #+#    #+#              #
-#    Updated: 2025/05/30 18:37:03 by iksaiz-m         ###   ########.fr        #
+#    Updated: 2025/06/11 17:59:53 by iksaiz-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CFLAGS       = -Wall -Wextra -Werror -O3 -g -g3
 
 NAME         = cub3d
 RM           = rm -rf
-SRC = stuff.c  utils.c utils2.c utils3.c utils4.c
+SRC = stuff.c  utils.c utils2.c utils3.c utils4.c utils5.c
 
 OBJS = $(SRC:.c=.o)
 
