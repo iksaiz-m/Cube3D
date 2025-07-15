@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:53:31 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/08 19:32:10 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 21:18:11 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	checkcolors(t_map *map, int i)
 
 	arr = ft_split(map->colors[i], ' ');
 	if (i == 0 && ft_strcmp(arr[0], "F"))
-		return (msg(2, FLOOR), exit(1));
+		return (msg(2, FLOOR), freeme(arr), freetextures(map), exit(1));
 	if (i == 1 && ft_strcmp(arr[0], "C"))
-		return (msg(2, CEILING), exit(1));
+		return (msg(2, CEILING), freeme(arr), freetextures(map), exit(1));
 	noendline = noendl_dup(arr[1]);
 	freeme(arr);
 	if (i == 0)

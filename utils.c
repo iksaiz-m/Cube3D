@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:47:48 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/08 20:17:33 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 21:59:51 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	fill_directions(t_map *map, int i, char *noendline)
 	{
 		map->northtexture = ft_strdup(noendline);
 		// msg(1, map->northtexture);
+		// printf("\nnorth texture: %s\n", map->northtexture);
 	}
 	if (i == 1)
 	{
@@ -68,13 +69,13 @@ void	checkdirections(t_map *map, int i)
 
 	arr = ft_split(map->directions[i], ' ');
 	if (i == 0 && ft_strcmp(arr[0], "NO"))
-		return (msg(2, MAPERROR5), exit(1));
+		return (msg(2, MAPERROR5), freeme(arr), freetextures(map), exit(1));
 	if (i == 1 && ft_strcmp(arr[0], "SO"))
-		return (msg(2, MAPERROR6), exit(1));
+		return (msg(2, MAPERROR6), freeme(arr), freetextures(map), exit(1));
 	if (i == 2 && ft_strcmp(arr[0], "WE"))
-		return (msg(2, MAPERROR7), exit(1));
+		return (msg(2, MAPERROR7), freeme(arr), freetextures(map), exit(1));
 	if (i == 3 && ft_strcmp(arr[0], "EA"))
-		return (msg(2, MAPERROR8), exit(1));
+		return (msg(2, MAPERROR8), freeme(arr), freetextures(map), exit(1));
 	/* Me falta ver si la ruta existe  */
 	if (arr[1])
 		noendline = noendl_dup(arr[1]);
@@ -87,34 +88,68 @@ void	checkdirections(t_map *map, int i)
 	if (fd > 0)
 		close(fd);
 	else
-		return (msg(2, IMG), exit(1));
+		return (msg(2, IMG), freetextures(map), exit(1));
 }
+// ft_memdel(map->path), ft_memdel(map->name),
+// 			ft_memdel(map->northtexture), ft_memdel(map->easttexture), ft_memdel(map->southtexture), ft_memdel(map->westtexture)
 
-void	directions_bridge(t_map *map, int *i, int fd)
+			
+// void	directions_bridge(t_map *map, int *i, int fd)
+// {
+// 	int		ii;
+// 	char	*line;
+
+// 	ii = 0;
+// 	while (*i < map->ndirections)
+// 	{
+// 		line = get_next_line(fd);
+// 		if (*i == 0 && line == NULL)
+// 			return (msg(2, MAPERROR3), exit(1));
+// 		if (line && ft_strcmp(line, "\n"))
+// 		{
+// 			/* Aqui quiero incluir la linea valida dentro del array de strings de la estructura RECUERDA borrar el salto de linea del final del string cuando le pases la informacion definitiva a Ibon*/
+// 			ii = 0;
+// 			while (line[ii])
+// 			{
+// 				map->directions[*i][ii] = line[ii];
+// 				ii++;
+// 			}
+// 			map->directions[*i][ii] = '\0';
+// 			msg(1, map->directions[*i]);
+// 			ft_memdel(line);
+// 			checkdirections(map, *i);
+// 			(*i)++;
+// 		}
+// 	}
+// }
+
+
+void	directions_bridge(t_map *map, int i, int fd)
 {
 	int		ii;
 	char	*line;
 
 	ii = 0;
-	while (*i < map->ndirections)
+	while (i < map->ndirections)
 	{
 		line = get_next_line(fd);
-		if (*i == 0 && line == NULL)
-			return (msg(2, MAPERROR3), exit(1));
+		if (i == 0 && line == NULL)
+			return (msg(2, MAPERROR3), freetextures(map), exit(1));
 		if (line && ft_strcmp(line, "\n"))
 		{
 			/* Aqui quiero incluir la linea valida dentro del array de strings de la estructura RECUERDA borrar el salto de linea del final del string cuando le pases la informacion definitiva a Ibon*/
 			ii = 0;
 			while (line[ii])
 			{
-				map->directions[*i][ii] = line[ii];
+				map->directions[i][ii] = line[ii];
 				ii++;
 			}
-			map->directions[*i][ii] = '\0';
-			msg(1, map->directions[*i]);
-			checkdirections(map, *i);
-			(*i)++;
+			map->directions[i][ii] = '\0';
+			msg(1, map->directions[i]);
+			printf("pointer0 ----> %p\n", line);
 			ft_memdel(line);
+			checkdirections(map, i);
+			(i)++;
 		}
 	}
 }
@@ -131,10 +166,10 @@ int	check3atributtes(t_map *map)
 		msg(1, "Todo el parseo funciona correctamente\n");
 		/* Primero checkeo las 4 direcciones y las meto en un doble punter de la estructura */
 		i = 0;
-		directions_bridge(map, &i, fd);
+		directions_bridge(map, i, fd);
 		/* Despues lo mismo con los colores del suelo y del cielo */
 		i = 0;
-		floornceiling(map, &i, fd);
+		floornceiling(map, i, fd);
 		/* Para terminar meto las lineas de mapa y me aseguro de quitar espacios y ver que los caracteres son correctos REMINDER:El mapa que le tengo que pasar a Ibon es la version con espacios*/
 		i = 0;
 		mapcpy(map, &i, fd);

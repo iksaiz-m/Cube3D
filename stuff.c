@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:38:04 by nkrasimi          #+#    #+#             */
-/*   Updated: 2025/07/08 20:24:32 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 20:09:10 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,27 +93,7 @@ void	print_matrix(char **matrix)
 	}
 }   
 
-void	ft_memdel(void *ptr)
-{
-	if (ptr != 0)
-	{
-		free(ptr);
-		ptr = NULL;
-	}
-}
 
-void	freeme(char **memory)
-{
-	int	i;
-
-	i = 0;
-	while (memory[i])
-	{
-		ft_memdel(memory[i]);
-		i++;
-	}
-	ft_memdel(memory);
-}
 
 /* int ismap(char *str) */
 /* { */
@@ -141,22 +121,17 @@ void	init_values(t_map *mapa)
 {
 	mapa->ndirections = 4;
 	mapa->ncolors = 2;
+	mapa->northtexture = NULL;
+	mapa->southtexture = NULL;
+	mapa->easttexture = NULL;
+	mapa->westtexture = NULL;
+	mapa->path = NULL;
+	mapa->name = NULL;
+	mapa->floorcolor = NULL;
+	mapa->ceilingcolor = NULL;
+	mapa->toflood_map = NULL;
+	mapa->final_map = NULL;
 }
-
-void	freeall(t_map *map)
-{
-	ft_memdel(map->path);
-	ft_memdel(map->name);
-	freeme(map->toflood_map);
-	freeme(map->final_map);
-	ft_memdel(map->northtexture);
-	ft_memdel(map->easttexture);
-	ft_memdel(map->westtexture);
-	ft_memdel(map->southtexture);
-	ft_memdel(map->floorcolor);
-	ft_memdel(map->ceilingcolor);
-}
-
 
 
 static void	events_init(t_map *mapa)
@@ -328,7 +303,7 @@ int main (int ac, char **av)
     {
 		mapa.path = ft_strdup(av[1]);
 		if (check3atributtes(&mapa) == 0)
-			return (msg(2, "Saliendo...\n"), ft_memdel(mapa.path), 1);
+			return (msg(2, "Saliendo...\n"), freetextures(&mapa), 1);
 	}
 	else
 		return (msg(1, ARGERROR3), 1);

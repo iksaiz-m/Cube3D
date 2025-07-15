@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:33:46 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/08 20:13:38 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 21:41:28 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define MAPERROR8 "East word is wrong\n"
 # define IMG "The image of one of the directions was not found in the system\n"
 # define FORMAT "Tiene que tener nombre y extension .cub\n"
-# define FORMAT2 "Lo que va delante de .cub tiene que ser el nombre del mapa\n"
+# define FORMAT2 "El nombre del mapa deberia ser printable\n"
 # define FORMAT3 "There is some non digit character\n"
 # define SPOTERROR "Should have only one player and map full with only 0 and 1\n"
 # define MEMERROR "Memory allocation failed\n"
@@ -110,6 +110,7 @@ typedef struct s_map
 	int		y;
 	int		column;
 	int		row;
+	double	starting_angle;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	char	*name;
@@ -146,19 +147,24 @@ int			ft_strcmp(char *s1, char *s2);
 void		ft_memdel(void *ptr);
 // void		ft_memdel(void **ptr);
 void		freeme(char **memory);
+void    	freetextures(t_map *map);
 // void		freeme(char ***memory);
+
 
 
 //utils.c
 int			ismap(char *str, t_map *map);
-void		directions_bridge(t_map *map, int *i, int fd);
+// void		directions_bridge(t_map *map, int *i, int fd);
+void		directions_bridge(t_map *map, int i, int fd);
 int			check3atributtes(t_map *map);
 void		checkdirections(t_map *map, int i);
 void		fill_directions(t_map *map, int i, char *noendline);
 
 //utils2.c
 char		*noendl_dup(const char *s1);
-void		floornceiling(t_map *map, int *i, int fd);
+// void		floornceiling(t_map *map, int *i, int fd);
+void		floornceiling(t_map *map, int i, int fd);
+
 void		mapcpy(t_map *map, int *i, int fd);
 void		getfinalmap(t_map *map);
 void		flood_staff(t_map *map);
@@ -189,5 +195,6 @@ int			closewindow(t_map *mapa);
 int			handle_key(int keysym, t_map *mapa);
 int 		checkmap_name_folders(char *str);
 int			check_printable_map_name(char *str, int i, int ii);
+void		know_starting_angle(t_map *map, int i, int ii);
 
 #endif

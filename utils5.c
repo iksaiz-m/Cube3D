@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:11:19 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/08 20:23:24 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/09 19:19:18 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,3 +67,17 @@ int	check_printable_map_name(char *str, int i, int ii)
 	return (1);
 }
 
+void	know_starting_angle(t_map *map, int i, int ii)
+{
+	if (map->toflood_map[i][ii] == 'N')
+		map->starting_angle = PI / 2;
+	else if ( map->toflood_map[i][ii] == 'S')
+		map->starting_angle = 3 * PI / 2;
+	else if (map->toflood_map[i][ii] == 'E')
+		map->starting_angle = 2 * PI;
+	else if (map->toflood_map[i][ii] == 'W')
+		map->starting_angle = PI;
+
+	printf("character: %c\n", map->toflood_map[i][ii]);
+	printf("starting angle: %f\n", map->starting_angle);
+}

@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:25:13 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/08 19:32:08 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/15 21:55:19 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ char	*noendl_dup(const char *s1)
 	return (memory);
 }
 
-void	floornceiling(t_map *map, int *i, int fd)
+void	floornceiling(t_map *map, int i, int fd)
 {
-	int	ii;
+	int		ii;
 	char	*line;
 
-	while (*i < map->ncolors)
+	while (i < map->ncolors)
 	{
 		line = get_next_line(fd);
 		if (line && ft_strcmp(line, "\n"))
@@ -43,42 +43,54 @@ void	floornceiling(t_map *map, int *i, int fd)
 			ii = 0;
 			while (line[ii])
 			{
-				map->colors[*i][ii] = line[ii];
+				map->colors[i][ii] = line[ii];
 				ii++;
 			}
-			map->colors[*i][ii] = '\0';
-			msg(1, map->colors[*i]);
-			checkcolors(map, *i);
-			(*i)++;
+			map->colors[i][ii] = '\0';
+			msg(1, map->colors[i]);
+			printf("linea1 ----> %s\n", line);
+			printf("pointer1 ----> %p\n", line);
+			ft_memdel(line);
+			checkcolors(map, i);
+			if (!line)
+				printf("linea2 ----> %s\n", line);
+			(i)++;
 		}
-		ft_memdel(line);
-	}	
+	}
 }
 
 void	mapcpy(t_map *map, int *i, int fd)
 {
 	int	ii;
 	char	*line;
+	int x;
+
+	x = 0;
+	printf("valor i: %d\n", *i);
+	printf("valor x: %d\n", x);
 
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
+		// printf("line lenght: %zu\n", ft_strlen(line));
 		if (ft_strcmp(line, "\n"))
 		{
 			ii = 0;
 			while (line[ii])
 			{
-				map->map[*i][ii] = line[ii];
+				map->map[x][ii] = line[ii];
+				// printf("line: %d %s\n", x, line);
+				// printf("character en line[ii] %c\n", line[ii]);
 				ii++;
 			}
-			map->map[*i][ii] = '\0';
-			(*i)++;
+			map->map[x][ii] = '\0';
+			(x)++;
 		}
 		ft_memdel(line);
 	}
-	map->row = *i;
+	map->row = x;
 }
 
 void	getfinalmap(t_map *map)
