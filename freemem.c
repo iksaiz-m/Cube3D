@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 19:35:42 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/15 21:57:55 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/18 15:55:59 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 void	ft_memdel(void *ptr)
 {
-	static int i = 0;
-
 	if (ptr != 0)
 	{
-		printf("ptr %p\n", ptr);
-		printf("%d\n", i++);
 		free(ptr);
 		ptr = NULL;
 	}
@@ -30,6 +26,8 @@ void	freeme(char **memory)
 	int	i;
 
 	i = 0;
+	if (!memory)
+		return ;
 	while (memory[i])
 	{
 		ft_memdel(memory[i]);
@@ -49,7 +47,6 @@ void	freetextures(t_map *map)
 	ft_memdel(map->floorcolor);
 	ft_memdel(map->ceilingcolor);
 }
-
 
 void	freeall(t_map *map)
 {

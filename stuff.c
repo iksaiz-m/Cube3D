@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:38:04 by nkrasimi          #+#    #+#             */
-/*   Updated: 2025/07/15 20:09:10 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/18 15:55:03 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,7 +303,7 @@ int main (int ac, char **av)
     {
 		mapa.path = ft_strdup(av[1]);
 		if (check3atributtes(&mapa) == 0)
-			return (msg(2, "Saliendo...\n"), freetextures(&mapa), 1);
+			return (msg(2, "Saliendo...\n"), freeall(&mapa), 1);
 	}
 	else
 		return (msg(1, ARGERROR3), 1);

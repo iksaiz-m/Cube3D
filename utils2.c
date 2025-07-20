@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:25:13 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/15 21:55:19 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/16 20:12:51 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,12 @@ void	floornceiling(t_map *map, int i, int fd)
 			}
 			map->colors[i][ii] = '\0';
 			msg(1, map->colors[i]);
-			printf("linea1 ----> %s\n", line);
-			printf("pointer1 ----> %p\n", line);
 			ft_memdel(line);
 			checkcolors(map, i);
-			if (!line)
-				printf("linea2 ----> %s\n", line);
 			(i)++;
 		}
+		else
+			ft_memdel(line);
 	}
 }
 

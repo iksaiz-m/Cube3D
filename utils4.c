@@ -6,14 +6,58 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:53:31 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/15 21:18:11 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/20 19:53:40 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "cub3.h"
 
-void	isrgbable(char **arr2)
+// void	isrgbable(char **arr2)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (arr2[i])
+// 	{
+// 		if (ft_atoi(arr2[i]) < 0 || ft_atoi(arr2[i]) > 255)
+// 			return (msg(2, RGBERROR2), exit(1));
+// 		i++;
+// 	}
+// 	msg(1, "\nTodo esta funcionando muy bien por lo visto :)\n");
+// }
+
+// void	isvalidnum(char **arr2)
+// {
+// 	int	i;
+// 	int	ii;
+
+// 	i = 0;
+// 	/* Primero mirare el numero de argumentos para asegurarme de que son tres numeros */
+// 	while (arr2[i])
+// 		i++;
+// 	if (i != 3)
+// 		return (msg(2, RGBERROR), exit(1));
+// 	/* Ahora tendre que comprobar que todos los caracteres son numeros */
+// 	i = 0;
+// 	while (arr2[i])
+// 	{
+// 		ii = 0;
+// 		while (arr2[i][ii])
+// 		{
+// 			if (!ft_isdigit(arr2[i][ii]))
+// 				return (msg(2, FORMAT3), exit(1));
+// 			ii++;
+// 		}
+// 		i++;
+// 	}
+// 	/* Aqui mirare que los numeros estan entre el 0 y el 255 ambos incluidos con el atoi*/
+// 	isrgbable(arr2);
+// }
+
+
+
+int	isrgbable(char **arr2)
 {
 	int	i;
 
@@ -21,13 +65,14 @@ void	isrgbable(char **arr2)
 	while (arr2[i])
 	{
 		if (ft_atoi(arr2[i]) < 0 || ft_atoi(arr2[i]) > 255)
-			return (msg(2, RGBERROR2), exit(1));
+			return (msg(2, RGBERROR2), 1);
 		i++;
 	}
 	msg(1, "\nTodo esta funcionando muy bien por lo visto :)\n");
+	return (0);
 }
 
-void	isvalidnum(char **arr2)
+int	isvalidnum(char **arr2)
 {
 	int	i;
 	int	ii;
@@ -37,7 +82,7 @@ void	isvalidnum(char **arr2)
 	while (arr2[i])
 		i++;
 	if (i != 3)
-		return (msg(2, RGBERROR), exit(1));
+		return (msg(2, RGBERROR), 1);
 	/* Ahora tendre que comprobar que todos los caracteres son numeros */
 	i = 0;
 	while (arr2[i])
@@ -46,13 +91,15 @@ void	isvalidnum(char **arr2)
 		while (arr2[i][ii])
 		{
 			if (!ft_isdigit(arr2[i][ii]))
-				return (msg(2, FORMAT3), exit(1));
+				return (msg(2, FORMAT3), 1);
 			ii++;
 		}
 		i++;
 	}
 	/* Aqui mirare que los numeros estan entre el 0 y el 255 ambos incluidos con el atoi*/
-	isrgbable(arr2);
+	if (isrgbable(arr2))
+		return (1);
+	return (0);
 }
 
 void	checkcolors(t_map *map, int i)

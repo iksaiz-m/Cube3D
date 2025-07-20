@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 19:05:06 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2024/09/12 17:42:49 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/20 21:10:51 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,16 @@ static char	*ft_get_rest_line(char *save)
 	int		i;
 	char	*new_save;
 
+	new_save = NULL;
 	i = 0;
 	while (save[i] && save[i] != '\n')
 		i++;
 	if (!save[i])
-		return (free (save), NULL);
-	i++;
-	new_save = ft_substr(save, i, ft_strlen(save));
-	if (new_save == NULL)
 		return (free(save), NULL);
+	i++;
+	// new_save = ft_substr(save, i, ft_strlen(save));
+	// if (new_save == NULL)
+	// 	return (free(save), NULL);
 	free(save);
 	return (new_save);
 }

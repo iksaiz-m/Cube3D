@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:33:46 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/15 21:41:28 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/20 19:54:50 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@
 # define MAPERROR6 "South word is wrong\n"
 # define MAPERROR7 "West word is wrong\n"
 # define MAPERROR8 "East word is wrong\n"
+# define MAPERROR9 "Something went wrong checking atributes\n"
+# define MAPERROR10 "Atribute not found\n"
+# define MAP_ARG_DUP "Atribute is found more than once\n"
 # define IMG "The image of one of the directions was not found in the system\n"
 # define FORMAT "Tiene que tener nombre y extension .cub\n"
 # define FORMAT2 "El nombre del mapa deberia ser printable\n"
@@ -180,8 +183,10 @@ int			checkclosemap(t_map *map, int i, int ii);
 
 //utils4.c
 void		checkcolors(t_map *map, int i);
-void		isvalidnum(char **arr2);
-void		isrgbable(char **arr2);
+// void		isvalidnum(char **arr2);
+int			isvalidnum(char **arr2);
+// void		isrgbable(char **arr2);
+int			isrgbable(char **arr2);
 void		flood_fill(t_map *mapa, char **map, int x, int y);
 
 void		freeall(t_map *map);
