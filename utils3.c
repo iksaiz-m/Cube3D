@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:30:31 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/09 19:14:54 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:29:42 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ int	checkns(t_map *map, int count, int i, int ii)
 		while (map->toflood_map[i][ii])
 		{
 			if (ft_is_nswe(map->toflood_map[i][ii]) != 1)
-					return (0);
+				return (0);
 			if (map->toflood_map[i][ii] == 'N' || map->toflood_map[i][ii] == 'S'
-				|| map->toflood_map[i][ii] == 'E' || map->toflood_map[i][ii] == 'W')
+				|| map->toflood_map[i][ii] == 'E'
+				|| map->toflood_map[i][ii] == 'W')
 			{
 				if (count == 0)
 					add_values(map, i, ii);

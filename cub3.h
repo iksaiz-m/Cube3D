@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:33:46 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/20 19:54:50 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/22 20:13:48 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <X11/keysym.h>
 # include <stdio.h>
 # include <math.h>
+#include <string.h>
 
 # define RED 0xFF0000
 # define GREEN 0xFF00
@@ -43,7 +44,7 @@
 # define MAPERROR8 "East word is wrong\n"
 # define MAPERROR9 "Something went wrong checking atributes\n"
 # define MAPERROR10 "Atribute not found\n"
-# define MAP_ARG_DUP "Atribute is found more than once\n"
+# define MAP_ARG_DUP "Atribute is found more than once "
 # define IMG "The image of one of the directions was not found in the system\n"
 # define FORMAT "Tiene que tener nombre y extension .cub\n"
 # define FORMAT2 "El nombre del mapa deberia ser printable\n"
@@ -93,14 +94,14 @@ typedef struct s_cube
 
 typedef struct s_map
 {
-	char	directions[4][200];
-	int		ndirections;
+	// char	directions[4][200];
+	// int		ndirections;
 	char	*northtexture;
 	char	*southtexture;
 	char	*westtexture;
 	char	*easttexture;
-	char	colors[2][200];
-	int		ncolors;
+	// char	colors[2][200];
+	// int		ncolors;
 	char	*floorcolor;
 	char	*ceilingcolor;
 	char	map[2000][2000];
@@ -154,14 +155,19 @@ void    	freetextures(t_map *map);
 // void		freeme(char ***memory);
 
 
+//parselineutils.c
+void	parsefloorceilingdirections(t_map *map, int i, int fd);
 
+//asignatributes.c
+int		asign_colors(t_map *map, char **arr);
+int		asign_directions(t_map *map, char **arr);
 //utils.c
 int			ismap(char *str, t_map *map);
 // void		directions_bridge(t_map *map, int *i, int fd);
 void		directions_bridge(t_map *map, int i, int fd);
 int			check3atributtes(t_map *map);
 void		checkdirections(t_map *map, int i);
-void		fill_directions(t_map *map, int i, char *noendline);
+// void		fill_directions(t_map *map, int i, char *noendline);
 
 //utils2.c
 char		*noendl_dup(const char *s1);

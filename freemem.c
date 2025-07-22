@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 19:35:42 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/18 15:55:59 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:33:47 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	freetextures(t_map *map)
 
 void	freeall(t_map *map)
 {
-    freetextures(map);
+	freetextures(map);
 	freeme(map->toflood_map);
 	freeme(map->final_map);
 }
