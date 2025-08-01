@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:47:48 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/22 20:07:13 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/08/01 20:00:31 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,18 @@ int	check3atributtes(t_map *map)
 	int	i;
 
 	fd = open(map->path, O_RDONLY);
-	// Tenemos que importar el GNL para poder parsear esto correctamente bueno y la libft tambien
 	if (fd > 0)
 	{
 		msg(1, "Todo el parseo funciona correctamente\n");
-		/* Primero checkeo las 4 direcciones y las meto en un doble punter de la estructura */
 		i = 1;
 		parsefloorceilingdirections(map, i, fd);
-		// directions_bridge(map, i, fd);
-		/* Despues lo mismo con los colores del suelo y del cielo */
 		i = 0;
-		// floornceiling(map, i, fd);
-		/* Para terminar meto las lineas de mapa y me aseguro de quitar espacios y ver que los caracteres son correctos REMINDER:El mapa que le tengo que pasar a Ibon es la version con espacios*/
 		i = 0;
 		mapcpy(map, &i, fd);
 		printf("El numero de lineas del mapa es: %d\n", map->row);
 		getfinalmap(map);
 		if (map->final_map == NULL)
 			return (msg(2, MAPERROR), freeme(map->final_map), 0);
-		/* Floodfill para asegurarme que el mapa esta correctamente cerrado */
 		flood_staff(map);
 	}
 	else

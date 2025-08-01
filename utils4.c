@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:53:31 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/07/22 20:10:07 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/08/01 20:00:55 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,10 @@ int	isvalidnum(char **arr2)
 	int	ii;
 
 	i = 0;
-	/* Primero mirare el numero de argumentos para asegurarme de que son tres numeros */
 	while (arr2[i])
 		i++;
 	if (i != 3)
 		return (msg(2, RGBERROR), 1);
-	/* Ahora tendre que comprobar que todos los caracteres son numeros */
 	i = 0;
 	while (arr2[i])
 	{
@@ -51,7 +49,6 @@ int	isvalidnum(char **arr2)
 		}
 		i++;
 	}
-	/* Aqui mirare que los numeros estan entre el 0 y el 255 ambos incluidos con el atoi*/
 	if (isrgbable(arr2))
 		return (1);
 	return (0);
