@@ -6,109 +6,45 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 18:17:11 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/08/01 19:57:09 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/08/02 20:38:12 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3.h"
 
-void	put_pixel(int x, int y, int color, t_map *mapa)
+void	calculate_and_draw_pixel(t_map *mapa, int start_y, int tex_x, int x)
 {
-	int	index;
+	int		offset;
+	int		color;
+	int		tex_y;
 
-	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
+	mapa->d = start_y * 256 - HEIGHT * 128 + mapa->line_height * 128;
+	tex_y = (mapa->d * mapa->current_tex->height) / mapa->line_height / 256;
+	if (tex_x < 0 || tex_x >= mapa->current_tex->width || tex_y < 0
+		|| tex_y >= mapa->current_tex->height)
 		return ;
-	index = y * mapa->line_length + x * mapa->bpp / 8;
-	mapa->pixel_ptr[index] = color & 0xFF;
-	mapa->pixel_ptr[index + 1] = (color >> 8) & 0xFF;
-	mapa->pixel_ptr[index + 2] = (color >> 16) & 0xFF;
-}
-
-// void draw_line_on_map(double x, double y, double x1, double y1, t_map *mapa)
-// {
-//     double dx;
-//     double dy;
-//     double steps;
-//     double x_inc;
-//     double y_inc;
-//     int i;
-
-//     dx = mapa->ray_x - mapa->x;
-//     dy = mapa->ray_y - mapa->y;
-//     steps = fmax(fabs(dx), fabs(dy));
-//     x_inc = dx / steps;
-//     y_inc = dy / steps;
-//     i = -1;
-//     while (++i <= steps)
-//     {
-//         put_pixel(x, y, 0xC37777, mapa);
-//         x += x_inc;
-//         y += y_inc;
-//     }
-// }
-
-void	draw_square(int x, int y, int color, t_map *mapa)
-{
-	int	x2;
-	int	y2;
-
-	y2 = y;
-	x2 = x;
-	while (y < (y2 + SIZE))
-	{
-		x = x2;
-		while (x < (x2 + SIZE))
-		{
-			put_pixel (x, y, color, mapa);
-			x++;
-		}
-		y++;
-	}
-}
-
-void	draw_map(t_map *mapa)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (mapa->map[y] != NULL)
-	{
-		x = 0;
-		while (mapa->map[y][x] != '\0')
-		{
-			if (mapa->map[y][x] == '1')
-				draw_square(x * SIZE, y * SIZE, 0x555555, mapa);
-			else
-				draw_square(x * SIZE, y * SIZE, 0xAAAAAA, mapa);
-			x++;
-		}
-		y++;
-	}
+	offset = tex_y * mapa->current_tex->line_len + tex_x
+		* (mapa->current_tex->bpp / 8);
+	if (offset < 0 || offset + 3 >= mapa->current_tex->height
+		* mapa->current_tex->line_len)
+		return ;
+	color = *(int *)(mapa->current_tex->data + offset);
+	put_pixel(x, start_y, color, mapa);
 }
 
 void	draw_wall(int x, int start_y, int end_y, t_map *mapa)
 {
-	double	wall_x;
-	int		tex_x;
-	int		tex_y;
-	int		offset;
-	int		color;
+	double		wall_x;
+	int			tex_x;
 
-	t_texture *tex = mapa->current_tex;
 	wall_x = mapa->wall_x - floor(mapa->wall_x);
-	tex_x = (int)(wall_x * tex->width);
-	if ((mapa->side == 0 && mapa->ray_dir_x < 0) || 
-		(mapa->side == 1 && mapa->ray_dir_y > 0))
-		tex_x = tex->width - tex_x - 1;
+	tex_x = (int)(wall_x * mapa->current_tex->width);
+	if ((mapa->side == 0 && mapa->ray_dir_x < 0)
+		|| (mapa->side == 1 && mapa->ray_dir_y > 0))
+		tex_x = mapa->current_tex->width - tex_x - 1;
 	while (start_y < end_y)
-		for (int y = start_y; y < end_y; y++)
 	{
-		mapa->d = y * 256 - HEIGHT * 128 + mapa->line_height * 128;
-		tex_y = (mapa->d * tex->height) / mapa->line_height / 256;
-		offset = tex_y * tex->line_len + tex_x * (tex->bpp / 8);
-		color = *(int *)(tex->data + offset);
-		put_pixel(x, y, color, mapa);
+		calculate_and_draw_pixel(mapa, start_y, tex_x, x);
 		start_y++;
 	}
 }
@@ -126,34 +62,6 @@ void	draw_3d_dda(int x, int start_y, int end_y, t_map *mapa)
 	{
 		put_pixel(x, y, 0x444444, mapa);
 		y++;
-	}
-}
-
-void	put_circle(int xc, int yc, int r, int color, t_map *mapa)
-{
-	int	x = 0;
-	int	d = 1 - r;
-	int	i;
-
-	while (r >= x)
-	{
-		i = xc - x - 1;
-		while (++i <= xc + x)
-		{
-			put_pixel(i, yc + r, color, mapa);
-			put_pixel(i, yc - r, color, mapa);
-		}
-		i = xc - r - 1;
-		while (++i <= xc + r)
-		{
-			put_pixel(i, yc + x, color, mapa);
-			put_pixel(i, yc - x, color, mapa);
-		}
-		x++;
-		if (d < 0)
-			d = d + 2 * x + 1;
-		else
-			d = d + 2 * (x - --r) + 1;
 	}
 }
 

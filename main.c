@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stuff.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:38:04 by nkrasimi          #+#    #+#             */
-/*   Updated: 2025/08/01 20:25:57 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/08/02 20:33:56 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3.h"
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] != '\0' || s2[i] != '\0')
-	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
-	}
-	return (0);
-}
 
 void	init_values(t_map *mapa)
 {
@@ -39,24 +25,6 @@ void	init_values(t_map *mapa)
 	mapa->toflood_map = NULL;
 	mapa->final_map = NULL;
 }
-
-// static void	events_init(t_map *mapa)
-// {
-// 	mlx_hook(mapa->win_ptr, KeyPress, KeyPressMask, handle_key, mapa);
-// 	mlx_hook(mapa->win_ptr, DestroyNotify, StructureNotifyMask,
-// 		closewindow, mapa);
-// }
-// static void	my_mlx_pixel_put(int x, int y, int color, t_img *img)
-// {
-// 	int	index;
-
-// 	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
-// 		return ;
-// 	index = y * img->line_len + x * img->bpp / 8;
-// 	img->addr[index] = color & 0xFF;
-// 	img->addr[index + 1] = (color >> 8) & 0xFF;
-// 	img->addr[index + 2] = (color >> 16) & 0xFF;
-// }
 
 void	load_texture(t_map *mapa, t_texture *tex, char *path)
 {
@@ -121,12 +89,12 @@ int	main(int ac, char **av)
 	else
 		return (msg(1, ARGERROR3), 1);
 	cubed_init(&mapa);
-	mlx_hook(mapa.win_ptr, 2, 1L<<0, handle_key, &mapa);
-	mlx_hook(mapa.win_ptr, 3, 1L<<1, key_release, &mapa);
-	mlx_hook(mapa.win_ptr, DestroyNotify, StructureNotifyMask,
+	mlx_hook (mapa.win_ptr, 2, KeyPressMask, handle_key, &mapa);
+	mlx_hook (mapa.win_ptr, 3, KeyReleaseMask, key_release, &mapa);
+	mlx_hook (mapa.win_ptr, DestroyNotify, StructureNotifyMask,
 		closewindow, &mapa);
-	mlx_loop_hook(mapa.mlx_ptr, cubed_render, &mapa);
-	mlx_loop(mapa.mlx_ptr);
+	mlx_loop_hook (mapa.mlx_ptr, cubed_render, &mapa);
+	mlx_loop (mapa.mlx_ptr);
 	freeall(&mapa);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:53:31 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/08/01 20:00:55 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/08/02 20:24:17 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,14 @@ int	ft_is_nswe(char c)
 
 void	flood_fill(t_map *mapa, char **map, int x, int y)
 {
-	if (map[x][y] == ' ' || map[x][y] == '\n' || map[x][y] == '	')
+	if (x < 0)
+		return (msg(2, MAPERROR4), freeall(mapa), exit(1));
+	if (x == mapa->row)
+		return (msg(2, MAPERROR4), freeall(mapa), exit(1));
+	if (map[x][y] == ' ' || map[x][y] == '\n' || map[x][y] == '	'
+		|| map[x][y] == '\0')
+		return (msg(2, MAPERROR4), freeall(mapa), exit(1));
+	if (!map[x][y])
 		return (msg(2, MAPERROR4), freeall(mapa), exit(1));
 	if (map[x][y] && map[x][y] != '1')
 	{

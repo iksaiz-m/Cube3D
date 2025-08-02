@@ -6,28 +6,11 @@
 /*   By: iksaiz-m <iksaiz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 17:37:59 by iksaiz-m          #+#    #+#             */
-/*   Updated: 2025/08/01 20:04:41 by iksaiz-m         ###   ########.fr       */
+/*   Updated: 2025/08/02 20:36:04 by iksaiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3.h"
-
-// int	key_release(int keysym, t_map *mapa)
-// {
-// 	if (keysym == XK_a)
-// 		mapa->key_a = 0;
-// 	else if (keysym == XK_d)
-// 		mapa->key_d = 0;
-// 	else if (keysym == XK_w)
-// 		mapa->key_w = 0;
-// 	else if (keysym == XK_s)
-// 		mapa->key_s = 0;
-// 	else if (keysym == XK_Left)
-// 		mapa->key_left = 0;
-// 	else if (keysym == XK_Right)
-// 		mapa->key_right = 0;
-// 	return (0);
-// }
 
 int	is_wall(t_map *mapa, double pos_x, double pos_y)
 {

@@ -86,16 +86,16 @@ void	select_texture(t_map *mapa)
 	if (mapa->side == 0)
 	{
 		if (mapa->ray_dir_x > 0)
-			mapa->current_tex = &mapa->tex_west;
-		else
 			mapa->current_tex = &mapa->tex_east;
+		else
+			mapa->current_tex = &mapa->tex_west;
 	}
 	else
 	{
 		if (mapa->ray_dir_y > 0)
-			mapa->current_tex = &mapa->tex_north;
-		else
 			mapa->current_tex = &mapa->tex_south;
+		else
+			mapa->current_tex = &mapa->tex_north;
 	}
 }
 
